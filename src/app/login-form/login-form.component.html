@@ -1,0 +1,39 @@
+<form #form="ngForm" class="border rounded shadow-sm align-middle m-auto mt-5 p-3">
+  <p class="fs-1 fw-bold">Login<p></p>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input 
+      required 
+      pattern="[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}" 
+      ngModel 
+      name="email" 
+      #emailInput="ngModel" 
+      id="email" 
+      type="text" 
+      class="form-control mb-2">
+    <div class="alert alert-danger" *ngIf="emailInput.touched && !emailInput.valid">
+      <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+      <div *ngIf="emailInput.errors?.['pattern']">Enter valid email.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input 
+      required 
+      ngModel 
+      name="password" 
+      #passwordInput="ngModel"
+      type="password" 
+      id="password" 
+      class="form-control mb-2">
+    <div class="alert alert-danger" *ngIf="passwordInput.touched && !passwordInput.valid">
+      <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
+    </div>
+  </div>
+  <button 
+    [disabled]="!form.valid" 
+    class="btn btn-primary mt-2" 
+    (click)="onLogin(form.value)">
+    Log in
+  </button>
+</form>
