@@ -1,5 +1,5 @@
 <form #form="ngForm" class="border rounded shadow-sm align-middle m-auto mt-5 p-3">
-  <p class="fs-1 fw-bold">Login<p></p>
+  <p class="fs-2 fw-bold">Log In<p></p>
   <div class="form-group">
     <label for="email">Email</label>
     <input 
@@ -10,8 +10,10 @@
       #emailInput="ngModel" 
       id="email" 
       type="text" 
-      class="form-control mb-2">
-    <div class="alert alert-danger" *ngIf="emailInput.touched && !emailInput.valid">
+      class="form-control mb-2"
+      [class.is-invalid]="!emailInput.valid && emailInput.touched"
+      >
+    <div class="invalid-feedback" *ngIf="emailInput.touched && !emailInput.valid">
       <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
       <div *ngIf="emailInput.errors?.['pattern']">Enter valid email.</div>
     </div>
@@ -25,8 +27,10 @@
       #passwordInput="ngModel"
       type="password" 
       id="password" 
-      class="form-control mb-2">
-    <div class="alert alert-danger" *ngIf="passwordInput.touched && !passwordInput.valid">
+      class="form-control mb-2"
+      [class.is-invalid]="passwordInput.touched && !passwordInput.valid"
+      >
+    <div class="invalid-feedback" *ngIf="passwordInput.touched && !passwordInput.valid">
       <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
     </div>
   </div>
@@ -34,6 +38,6 @@
     [disabled]="!form.valid" 
     class="btn btn-primary mt-2" 
     (click)="onLogin(form.value)">
-    Log in
+    Log In
   </button>
 </form>
